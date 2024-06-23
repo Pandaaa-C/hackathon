@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss"
 
 const config = {
-  darkMode: ["class"],
+  darkMode: ['selector', '[data-mode="dark"]'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -11,7 +11,11 @@ const config = {
   prefix: "",
   theme: {
     extend: {
-    },
+      colors: {
+        "background": '#121212',
+        'ice-white': '#eae3e3'
+      },
+    }
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config

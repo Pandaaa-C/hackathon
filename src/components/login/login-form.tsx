@@ -23,13 +23,13 @@ export default function LoginForm() {
         <form onSubmit={onSubmit} className={cn("w-full h-full flex flex-col items-center justify-center gap-5")}>
             <div className={cn("grid w-[300px] max-w-sm items-center gap-2")}>
                 <Label htmlFor="username">Username</Label>
-                <Input {...register('username')} type="username" id="username" placeholder="root"/>
-            </div>
+                <Input {...register('username')} type="username" id="username" placeholder="root" autoComplete={"off"} />
+            </div>  
             <div className={cn("grid w-[300px] max-w-sm items-center gap-2")}>
                 <Label htmlFor="password">Password</Label>
-                <Input {...register('password')} type="password" id="password" placeholder="toor"/>
+                <Input {...register('password')} type="password" id="password" placeholder="toor" autoComplete={"off"} />
             </div>
-            <Button variant="default" type="submit">Authenticate</Button>
+            <Button className={cn("bg-background hover:bg-ice-white hover:text-black")} variant="default" type="submit">Authenticate</Button>
         </form>
     )
 }
