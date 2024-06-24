@@ -14,6 +14,20 @@ export default function Home() {
         { id: 3, name: "Room 4", topic: "Infrastructure", difficulty: "Easy", currentPlayers: 2, maxPlayers: 5, open: true },
         { id: 4, name: "Room 5", topic: "Infrastructure", difficulty: "Medium", currentPlayers: 6, maxPlayers: 10, open: false },
         { id: 5, name: "Room 6", topic: "Infrastructure", difficulty: "Hard", currentPlayers: 10, maxPlayers: 15, open: false },
+        { id: 6, name: "Room 7", topic: "Web", difficulty: "Easy", currentPlayers: 0, maxPlayers: 5, open: false },
+        { id: 7, name: "Room 8", topic: "Web", difficulty: "Hard", currentPlayers: 15, maxPlayers: 15, open: true },
+        { id: 8, name: "Room 9", topic: "Web", difficulty: "Medium", currentPlayers: 4, maxPlayers: 10, open: false },
+        { id: 9, name: "Room 10", topic: "Infrastructure", difficulty: "Easy", currentPlayers: 2, maxPlayers: 5, open: true },
+        { id: 10, name: "Room 11", topic: "Infrastructure", difficulty: "Medium", currentPlayers: 6, maxPlayers: 10, open: false },
+        { id: 11, name: "Room 12", topic: "Infrastructure", difficulty: "Hard", currentPlayers: 10, maxPlayers: 15, open: false },
+        { id: 12, name: "Room 13", topic: "Infrastructure", difficulty: "Hard", currentPlayers: 10, maxPlayers: 15, open: false },
+        { id: 13, name: "Room 14", topic: "Web", difficulty: "Easy", currentPlayers: 0, maxPlayers: 5, open: false },
+        { id: 14, name: "Room 15", topic: "Web", difficulty: "Hard", currentPlayers: 15, maxPlayers: 15, open: true },
+        { id: 15, name: "Room 16", topic: "Web", difficulty: "Medium", currentPlayers: 4, maxPlayers: 10, open: false },
+        { id: 16, name: "Room 17", topic: "Infrastructure", difficulty: "Easy", currentPlayers: 2, maxPlayers: 5, open: true },
+        { id: 17, name: "Room 18", topic: "Infrastructure", difficulty: "Medium", currentPlayers: 6, maxPlayers: 10, open: false },
+        { id: 18, name: "Room 19", topic: "Infrastructure", difficulty: "Hard", currentPlayers: 10, maxPlayers: 15, open: false },
+        { id: 19, name: "Room 20", topic: "Infrastructure", difficulty: "Hard", currentPlayers: 10, maxPlayers: 15, open: false },
     ];
 
     return (

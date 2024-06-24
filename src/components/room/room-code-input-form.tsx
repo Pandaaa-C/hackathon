@@ -36,14 +36,14 @@ export default function RoomCodeInput({ id, name, close, callback }: { id: numbe
         <X className={cn("absolute top-0 right-0 m-1 hover:cursor-pointer")} onClick={close}></X>
         <p className={cn("text-xl font-bold")}>{name}</p>
         <div className={cn("grid w-[90%] max-w-sm items-center gap-2")}>
-          <Label htmlFor="code">Code</Label>
+          <Label htmlFor="code" className={cn("text-base font-bold")}>Code</Label>
           <Input {...register('code')} type="text" id="code" placeholder="AGREWJL541" autoComplete={"off"} />
         </div>
         {
           formState.errors.code && <p className={cn("text-red-500 text-sm")}>{formState.errors.code.message}</p>
         }
         <div className={cn("w-full h-12 flex justify-center items-center")}>
-          <button type="submit" className={cn("w-56 h-[80%] rounded bg-green-700 text-sm font-bold hover:bg-green-900 transition-colors")}>Join</button>
+          <button type="submit" className={cn("w-56 h-[80%] rounded bg-green-700 text-base font-bold hover:bg-green-900 transition-colors")}>Join</button>
         </div>
       </form>
     </div>

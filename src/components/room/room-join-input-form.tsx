@@ -32,14 +32,14 @@ export default function RoomJoinInput({ id, name, callback }: { id: number, name
         <X className={cn("absolute top-0 right-0 m-1 hover:cursor-pointer")} onClick={() => callback(-1)}></X>
         <p className={cn("text-xl font-bold")}>{name}</p>
         <div className={cn("grid w-[90%] max-w-sm items-center gap-2")}>
-          <Label htmlFor="name">Username</Label>
-          <Input {...register('name')} type="text" id="code" placeholder="John doe" autoComplete={"off"} />
+          <Label htmlFor="name" className={cn("text-base font-bold")}>Username</Label>
+          <Input {...register('name')} className={cn("text-base")} type="text" id="code" placeholder="John doe" autoComplete={"off"} />
         </div>
         {
           formState.errors.name && <p className={cn("text-red-500 text-sm")}>{formState.errors.name.message}</p>
         }
         <div className={cn("w-full h-12 flex justify-center items-center")}>
-          <button type="submit" className={cn("w-56 h-[80%] rounded bg-green-700 text-sm font-bold hover:bg-green-900 transition-colors")}>Join</button>
+          <button type="submit" className={cn("w-56 h-[80%] rounded bg-green-700 text-base font-bold hover:bg-green-900 transition-colors")}>Join</button>
         </div>
       </form>
     </div>
