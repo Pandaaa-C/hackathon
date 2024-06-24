@@ -6,8 +6,11 @@ import DashboardRoomItem from "./dashboard-room-item";
 import IRoomInfo from "@/interfaces/room-info";
 import RoomCodeInput from "../room/room-code-input-form";
 import RoomJoinInput from "../room/room-join-input-form";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function DashboardBody({ rooms }: { rooms: IRoomInfo[] }) {
+    const router = useRouter();
     const [roomCodeVerify, setRoomCodeVerify] = useState<number>(-1);
     const [roomJoinRequest, setRoomJoinRequest] = useState<number>(-1);
 
@@ -30,7 +33,14 @@ export default function DashboardBody({ rooms }: { rooms: IRoomInfo[] }) {
             {roomJoinRequest > -1 && <RoomJoinInput
                 id={rooms[rooms.findIndex(x => x.id === roomJoinRequest)].id}
                 name={rooms[rooms.findIndex(x => x.id === roomJoinRequest)].name}
-                callback={() => setRoomJoinRequest(-1)}
+                callback={() => {
+                    setRoomJoinRequest(-1);
+                    
+                    setTimeout(() => {
+                        toast.success("Successfully joined room!");
+                        router.push('/room/1');
+                    }, 200);
+                }}
             />}
 
             <div className={cn("w-full h-[75px] flex justify-center items-center content-center")}>
