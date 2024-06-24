@@ -23,6 +23,11 @@ export default function RoomFlagSubmit({ roomId }: { roomId: number }) {
 
   const onSubmit = handleSubmit(async (data) => {
     toast.success('Submitting flag..');
+    const test = Math.round(Math.random());
+    console.log(test)
+    setTimeout(() => {
+      test == 0 ? toast.success('You have found a flag!') : toast.error("Wrong flag!")
+    }, 500);
   });
 
   return (
@@ -34,7 +39,7 @@ export default function RoomFlagSubmit({ roomId }: { roomId: number }) {
             formState.errors.flag && <p className={cn("text-red-500 text-sm")}>{formState.errors.flag.message}</p>
           }
         </Label>
-        <Input {...register('flag')} type="text" id="flag" placeholder="BSDC-TEST-FLAG-123" autoComplete={"off"} />
+        <Input {...register('flag')} type="text" id="flag" placeholder="TEST-FLAG-123" autoComplete={"off"} />
       </div>
       <button type="submit" className={cn("w-[90%] h-full rounded bg-background text-base font-bold hover:bg-gray-600 transition-colors flex justify-center items-center")}>
         Submit
