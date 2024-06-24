@@ -20,9 +20,9 @@ export default function RoomLeaderboard() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className={cn("font-bold text-lg")}>Rank</TableHead>
+            <TableHead className={cn("font-bold text-lg w-[10%]")}>Rank</TableHead>
             <TableHead className={cn("font-bold text-lg")}>Name</TableHead>
-            <TableHead className={cn("font-bold text-lg")}>Flags</TableHead>
+            <TableHead className={cn("font-bold text-lg w-[10%]")}>Flags</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

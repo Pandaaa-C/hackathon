@@ -36,7 +36,7 @@ export default function DashboardBody({ rooms }: { rooms: IRoomInfo[] }) {
             <div className={cn("w-full h-[75px] flex justify-center items-center content-center")}>
                 <p className={cn("font-bold text-4xl")}>Active rooms</p>
             </div>
-            <div className={cn("w-full min-h-[425px] h-fit p-5 grid gap-4 grid-cols-5")}>
+            <div className={cn("w-full min-h-[425px] h-fit p-5 grid gap-4 md:grid-cols-5 sm:grid-cols-3")}>
                 {
                     rooms.map((room: IRoomInfo) => {
                         return <DashboardRoomItem key={room.id} roomData={room} joinRoom={handleRoomJoin} />
