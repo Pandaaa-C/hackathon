@@ -1,4 +1,4 @@
-import AdminBody from "@/components/admin/admin-create-body";
+import AdminBody from "@/components/admin/admin-body";
 
 export default async function AdminPage() {
   return (

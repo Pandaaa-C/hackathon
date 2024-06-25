@@ -10,9 +10,11 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
+import { FormEvent } from "react";
 
 export default function AdminCreateForm() {
   const {
+    setValue,
     register,
     handleSubmit,
     formState,
@@ -39,7 +41,7 @@ export default function AdminCreateForm() {
           formState.errors.topic && <p className={cn("text-red-500 text-sm")}>{formState.errors.topic.message}</p>
         }
         <Label htmlFor="topic" className={cn("text-base font-bold")}>Difficulty</Label>
-        <Select>
+        <Select onValueChange={(value: string) => setValue("difficulty", value)}>
           <SelectTrigger>
             <SelectValue {...register('difficulty')} placeholder="Select a difficulty" />
           </SelectTrigger>
@@ -56,11 +58,14 @@ export default function AdminCreateForm() {
         }
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <Label htmlFor="iso" className={cn("font-bold text-base")}>Choose file</Label>
-          <Input id="iso" {...register('iso')} type="file" />
+          <Input id="iso" onChange={(event) => setValue("iso", event.target.value)} type="file" />
         </div>
+        {
+          formState.errors.iso && <p className={cn("text-red-500 text-sm")}>{formState.errors.iso.message}</p>
+        }
         <div className="flex items-center space-x-2">
-          <Checkbox id="private" />
-          <Label htmlFor="topic" className={cn("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70")}>Create a private room?</Label>
+          <Checkbox onCheckedChange={(value: boolean) => setValue("private", value)} id="private" />
+          <Label htmlFor="private" className={cn("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70")}>Create a private room?</Label>
         </div>
         <div className={cn("w-full h-12 flex justify-center items-center")}>
           <button type="submit" className={cn("w-56 h-[80%] rounded bg-green-700 text-base font-bold hover:bg-green-900 transition-colors")}>Submit</button>
