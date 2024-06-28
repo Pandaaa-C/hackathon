@@ -8,8 +8,9 @@ import { loginFormSchema } from "@/interfaces/login-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { signIn } from 'next-auth/react';
+
 
 export default function LoginForm() {
     const router = useRouter();
@@ -22,11 +23,12 @@ export default function LoginForm() {
         resolver: zodResolver(loginFormSchema)
     })
     const onSubmit = handleSubmit(async (data) => {
-        toast.success("Validating login details..");
-
-        setTimeout(() => {
-            router.push('/admin')
-        }, 100);
+        await signIn('credentials', {
+            username: data.username,
+            password: data.password,
+            redirect: true,
+            callbackUrl: "/admin"
+        });
     });
 
     return (
