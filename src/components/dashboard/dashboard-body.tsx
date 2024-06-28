@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import DashboardRoomItem from "./dashboard-room-item";
-import IRoomInfo from "@/interfaces/room-info";
+import {IRoomInfo} from "@/interfaces/room-info";
 import RoomCodeInput from "../room/room-code-input-form";
 import RoomJoinInput from "../room/room-join-input-form";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,7 @@ export default function DashboardBody({ rooms }: { rooms: IRoomInfo[] }) {
         const room = rooms.find(x => x.id === id);
         if (!room) return;
 
-        room.open ? setRoomJoinRequest(id) : setRoomCodeVerify(id);
+        !room.open ? setRoomJoinRequest(id) : setRoomCodeVerify(id);
     };
 
     return (
@@ -46,7 +46,7 @@ export default function DashboardBody({ rooms }: { rooms: IRoomInfo[] }) {
             <div className={cn("w-full h-[75px] flex justify-center items-center content-center")}>
                 <p className={cn("font-bold text-4xl")}>Active rooms</p>
             </div>
-            <div className={cn("w-full min-h-[425px] h-fit p-5 grid gap-4 md:grid-cols-5 sm:grid-cols-3")}>
+            <div className={cn("w-full min-h-[200px] h-fit p-5 grid gap-4 md:grid-cols-5 sm:grid-cols-3")}>
                 {
                     rooms.map((room: IRoomInfo) => {
                         return <DashboardRoomItem key={room.id} roomData={room} joinRoom={handleRoomJoin} />

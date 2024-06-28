@@ -10,9 +10,13 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
-import { FormEvent } from "react";
+import { ChangeEvent } from "react";
+import { submitRoomForm } from "@/app/admin/create/(form)/submitRoomForm";
+import { useRouter } from "next/navigation";
 
 export default function AdminCreateForm() {
+  const router = useRouter();
+
   const {
     setValue,
     register,
@@ -23,7 +27,10 @@ export default function AdminCreateForm() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    toast.success('Creating room..');
+    const result = await submitRoomForm({ name: data.name, difficulty: data.difficulty, iso: data.iso, maxPlayers: data.maxPlayers, topic: data.topic, privateRoom: data.private });
+    result.success ? toast.success(result.message) : toast.error(result.message);
+
+    if (result.success) router.push("/admin/room/" + result.id);
   });
 
   return (
@@ -39,6 +46,11 @@ export default function AdminCreateForm() {
         <Input {...register('topic')} type="text" id="topic" placeholder="Infrastructure" autoComplete={"off"} />
         {
           formState.errors.topic && <p className={cn("text-red-500 text-sm")}>{formState.errors.topic.message}</p>
+        }
+        <Label htmlFor="maxPlayers" className={cn("text-base font-bold")}>Max Players</Label>
+        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => setValue("maxPlayers", parseInt(event.currentTarget.value))} type="number" id="maxPlayers" placeholder="50" autoComplete={"off"} />
+        {
+          formState.errors.maxPlayers && <p className={cn("text-red-500 text-sm")}>{formState.errors.maxPlayers.message}</p>
         }
         <Label htmlFor="topic" className={cn("text-base font-bold")}>Difficulty</Label>
         <Select onValueChange={(value: string) => setValue("difficulty", value)}>

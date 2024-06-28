@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import toast from "react-hot-toast";
+import { submitPrivateRoomJoin } from "@/app/admin/create/(form)/submitPrivateRoomJoin";
 
 export default function RoomJoinInput({ id, name, callback }: { id: number, name: string, callback: (id: number) => void }) {
   const {
@@ -22,8 +23,12 @@ export default function RoomJoinInput({ id, name, callback }: { id: number, name
     }
   })
   const onSubmit = handleSubmit(async (data) => {
-    toast.success('Requesting to join room..');
-    callback(id);
+    const result = await submitPrivateRoomJoin(data);
+    result.success ? toast.success(result.message) : toast.error(result.message);
+
+    if (result.success) {
+      callback(id);
+    }
   });
 
   return (

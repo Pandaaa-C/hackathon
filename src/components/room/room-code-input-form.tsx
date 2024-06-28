@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { X } from "lucide-react";
+import { Cake, X } from "lucide-react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { roomInputFormSchema } from "@/interfaces/room-form";
@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import toast from "react-hot-toast";
+import { submitPrivateRoomCode } from "@/app/admin/create/(form)/submitPrivateRoomCode";
 
 export default function RoomCodeInput({ id, name, close, callback }: { id: number, name: string, close: () => void, callback: (id: number) => void }) {
   const {
@@ -22,12 +23,14 @@ export default function RoomCodeInput({ id, name, close, callback }: { id: numbe
     }
   })
   const onSubmit = handleSubmit(async (data) => {
-    toast.success('Requesting room..');
-    close();
+    const result = await submitPrivateRoomCode(data);
+    result.success ? toast.success(result.message) : toast.error(result.message);
 
-    setTimeout(() => {
-      callback(data.id);
-    }, 100);
+    if (result.success) {
+      close();
+
+      setTimeout(() => callback(id), 500);
+    }
   });
 
   return (
