@@ -2,8 +2,14 @@
 
 import {cn} from "@/lib/utils";
 import LoginForm from "@/components/login/login-form";
+import { ISession } from "@/interfaces/session-user";
+import { useRouter } from "next/navigation";
 
-export default function LoginComponent() {
+export default function LoginComponent({session}: {session: ISession | null}) {
+    const router = useRouter();
+    if (session) {
+        router.push("/admin")
+    }
 
     return (
         <div className={cn("w-full h-screen flex items-center justify-center")}>

@@ -11,6 +11,7 @@ export interface IRoomInfo {
 export interface IRoomUser {
   name: string;
   accepted: boolean;
+  flags: number;
 }
 
 export interface IAdminRoom {

@@ -36,10 +36,7 @@ export default function DashboardBody({ rooms }: { rooms: IRoomInfo[] }) {
                 callback={() => {
                     setRoomJoinRequest(-1);
                     
-                    setTimeout(() => {
-                        toast.success("Successfully joined room!");
-                        router.push('/room/1');
-                    }, 200);
+                    // TODO: on request -> make user join
                 }}
             />}
 

@@ -80,7 +80,7 @@ export default function AdminRoomBody({ finishDate, room, players, session }: { 
           {players.filter(x => x.accepted).map((player, index) => {
             return (
               <div key={index} onClick={() => removeUserFromRoom(player)} className={cn("w-[75%] h-[10%] rounded flex flex-col bg-black justify-center items-center hover:cursor-pointer hover:bg-gray-800")}>
-                <p className={cn("text-base font-bold")}>{player.name}</p>
+                <p className={cn("text-base font-bold")}>{player.name} (Flags: {player.flags})</p>
               </div>
             )
           })}

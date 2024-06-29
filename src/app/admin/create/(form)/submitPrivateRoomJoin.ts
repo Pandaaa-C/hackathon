@@ -16,7 +16,8 @@ export async function submitPrivateRoomJoin({ id, name }: SubmitPrivateRoomJoinO
   const _players = JSON.parse(room.players) as IRoomUser[];
   _players.push({
     name: name,
-    accepted: false
+    accepted: false,
+    flags: 0
   });
 
   await db.rooms.update({ where: {id: id}, data: {
