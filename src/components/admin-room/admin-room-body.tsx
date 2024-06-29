@@ -43,9 +43,17 @@ export default function AdminRoomBody({ finishDate, room, players, session }: { 
         <div className={cn("w-[15%] h-[90%] bg-black m-2 rounded inline-flex justify-center items-center")}>
           <p className={cn("text-lg")}>Play Time: <span className={cn("text-base font-bold")}>{room.playTime}</span></p>
         </div>
-        <div className={cn("w-[15%] h-[90%] bg-black m-2 rounded inline-flex justify-center items-center")}>
-          <p className={cn("text-lg")}>Room Code: <span className={cn("text-base font-bold")}>{room.code}</span></p>
-        </div>
+        {
+          room.private ? (
+            <div className={cn("w-[15%] h-[90%] bg-black m-2 rounded inline-flex justify-center items-center")}>
+              <p className={cn("text-lg")}>Room Code: <span className={cn("text-base font-bold")}>{room.code}</span></p>
+            </div>
+          ) : (
+            <div className={cn("w-[15%] h-[90%] bg-black m-2 rounded inline-flex justify-center items-center")}>
+              <p className={cn("text-lg")}><span className={cn("text-base font-bold")}>Room is public</span></p>
+            </div>
+          )
+        }
       </div>
       <div className={cn("w-full h-[10%] p-4 flex justify-center items-center")}>
         <AdminRoomClock roomFinish={finishDate} />
@@ -58,7 +66,7 @@ export default function AdminRoomBody({ finishDate, room, players, session }: { 
           {players.filter(x => !x.accepted).map((player, index) => {
             return (
               <div key={index} onClick={() => acceptUserToRoom(player)} className={cn("w-[60%] h-[40%] rounded flex flex-col bg-black justify-center items-center hover:cursor-pointer hover:bg-gray-800")}>
-                <p className={cn("text-lg font-bold")}>{player.name}</p>
+                <p className={cn("text-base font-bold")}>{player.name}</p>
               </div>
             )
           })}
@@ -72,7 +80,7 @@ export default function AdminRoomBody({ finishDate, room, players, session }: { 
           {players.filter(x => x.accepted).map((player, index) => {
             return (
               <div key={index} onClick={() => removeUserFromRoom(player)} className={cn("w-[75%] h-[10%] rounded flex flex-col bg-black justify-center items-center hover:cursor-pointer hover:bg-gray-800")}>
-                <p className={cn("text-lg font-bold")}>{player.name}</p>
+                <p className={cn("text-base font-bold")}>{player.name}</p>
               </div>
             )
           })}

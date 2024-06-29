@@ -27,7 +27,15 @@ export default function AdminCreateForm() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    const result = await submitRoomForm({ name: data.name, difficulty: data.difficulty, iso: data.iso, maxPlayers: data.maxPlayers, topic: data.topic, privateRoom: data.private });
+    const result = await submitRoomForm({
+      name: data.name,
+      difficulty: data.difficulty,
+      iso: data.iso,
+      maxPlayers: data.maxPlayers,
+      playTime: data.playTime,
+      topic: data.topic,
+      privateRoom: data.private
+    });
     result.success ? toast.success(result.message) : toast.error(result.message);
 
     if (result.success) router.push("/admin/room/" + result.id);
@@ -51,6 +59,11 @@ export default function AdminCreateForm() {
         <Input onChange={(event: ChangeEvent<HTMLInputElement>) => setValue("maxPlayers", parseInt(event.currentTarget.value))} type="number" id="maxPlayers" placeholder="50" autoComplete={"off"} />
         {
           formState.errors.maxPlayers && <p className={cn("text-red-500 text-sm")}>{formState.errors.maxPlayers.message}</p>
+        }
+        <Label htmlFor="playTime" className={cn("text-base font-bold")}>Play Time</Label>
+        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => setValue("playTime", parseInt(event.currentTarget.value))} type="number" id="playTime" placeholder="24" autoComplete={"off"} />
+        {
+          formState.errors.playTime && <p className={cn("text-red-500 text-sm")}>{formState.errors.playTime.message}</p>
         }
         <Label htmlFor="topic" className={cn("text-base font-bold")}>Difficulty</Label>
         <Select onValueChange={(value: string) => setValue("difficulty", value)}>

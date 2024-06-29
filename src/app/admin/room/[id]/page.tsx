@@ -19,7 +19,7 @@ export default async function AdminRoomOverviewPage({ params }: { params: { id: 
   }
   
   const roomFinishDate = room.created_at;
-  roomFinishDate.setDate(room.created_at.getDate() + 1);
+  roomFinishDate.setHours(room.created_at.getHours() + room.playTime);
 
   return (
     <>

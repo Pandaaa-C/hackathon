@@ -1,13 +1,12 @@
 "use server";
 
 import { CreateRoomFormCallback, SubmitCreateRoomFormOptions } from "@/interfaces/room-create-form";
-import { ISession } from "@/interfaces/session-user";
 import { createRandomString } from "@/lib/generateRoomCode";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 
-export async function submitRoomForm({ name, topic, difficulty, maxPlayers, iso, privateRoom }: SubmitCreateRoomFormOptions): Promise<CreateRoomFormCallback> {
-  if (!name || !topic || !difficulty || !maxPlayers || !iso || !privateRoom) return { success: false, message: "Wrong input values! (#0.0)", id: -1 };
+export async function submitRoomForm({ name, topic, difficulty, maxPlayers, playTime, iso, privateRoom }: SubmitCreateRoomFormOptions): Promise<CreateRoomFormCallback> {
+  if (!name || !topic || !difficulty || !maxPlayers || !iso) return { success: false, message: "Wrong input values! (#0.0)", id: -1 };
   if (!name || name.length < 2 || name.length > 40) return { success: false, message: "Wrong name value! (#0.1)", id: -1 };
   if (!topic || topic.length < 2 || topic.length > 40) return { success: false, message: "Wrong topic value! (#0.2)", id: -1 };
   if (!difficulty || difficulty.length < 2 || difficulty.length > 40) return { success: false, message: "Wrong difficulty value! (#0.3)", id: -1 };
@@ -36,7 +35,7 @@ export async function submitRoomForm({ name, topic, difficulty, maxPlayers, iso,
       private: privateRoom,
       code: privateRoom ? createRandomString(10) : "",
       created_at: new Date(),
-      playTime: 24
+      playTime: playTime
     }
   });
 
