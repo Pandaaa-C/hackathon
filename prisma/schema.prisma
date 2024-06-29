@@ -8,13 +8,16 @@ datasource db {
 }
 
 model Accounts {
-  id       Int    @id @default(autoincrement())
-  username String @default("") @db.VarChar(50)
-  password String @db.LongText
+  id       Int     @id @default(autoincrement())
+  username String  @default("") @db.VarChar(50)
+  password String  @db.LongText
+  Rooms    Rooms[]
 }
 
 model Rooms {
   id         Int      @id @default(autoincrement())
+  creator    Accounts @relation(fields: [creator_id], references: [id])
+  creator_id Int
   name       String   @default("0") @db.VarChar(50)
   topic      String   @default("0") @db.VarChar(50)
   difficulty String   @default("0") @db.VarChar(50)
@@ -24,5 +27,5 @@ model Rooms {
   private    Boolean  @default(false)
   code       String   @default("0") @db.LongText
   players    String   @default("[]") @db.LongText
-  created_at DateTime @default(now())
+  created_at DateTime @db.DateTime(0)
 }

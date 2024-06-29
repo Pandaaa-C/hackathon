@@ -5,12 +5,12 @@ import { getServerSession } from "next-auth";
 import { db } from "./db";
 import { LoginFormCallback } from "@/interfaces/login-form";
 import { compare } from "bcrypt";
+import { ISession } from "@/interfaces/session-user";
 
 
-export const getServerAuthSession = () => getServerSession(authOptions as any);
+export const getServerAuthSession = (): Promise<ISession | null> => getServerSession(authOptions as any);
 
 export async function Authenticate(username: string, password: string): Promise<LoginFormCallback> {
-  console.log(username, password);
   if (!username || !password) {
     return {
       success: false,
@@ -41,6 +41,6 @@ export async function Authenticate(username: string, password: string): Promise<
   return {
     success: true,
     message: "Success",
-    data: user
+    data: user[0]
   };
 }

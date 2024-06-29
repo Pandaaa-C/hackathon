@@ -4,7 +4,6 @@ import { Adapter } from "next-auth/adapters";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/server/db";
-import { hash } from "bcrypt";
 
 export const authOptions = {
     adapter: PrismaAdapter(db) as Adapter,
@@ -19,11 +18,11 @@ export const authOptions = {
                 const { username, password } = credentials as { username: string; password: string };
                 const user = await Authenticate(username, password);
                 if (!user.success) {
-                    throw new Error(user.message);
+                    return null;
                 }
 
                 return user.data;
-            }
+            },
         })
     ],
     session: {
@@ -37,14 +36,15 @@ export const authOptions = {
         jwt: async ({ token, user }: any) => {
             if (user) {
                 token.id = user.id;
+                token.name = user.username;
             }
 
             return token;
         },
-
         session: async ({ session, token, user }: any) => {
             if (token) {
                 session.user.id = token.id;
+                session.user.name = token.name;
             }
 
             return session;

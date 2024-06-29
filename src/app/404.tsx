@@ -1,13 +1,14 @@
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/router";
+"use client";
 
-export default function Custom404() {
-  const router = useRouter();
+import { cn } from "@/lib/utils";
+import { Ban } from "lucide-react";
+
+export default function Custom404({ message = "" }: { message: string }) {
 
   return (
     <div className={cn("w-screen h-screen flex justify-center items-center flex-col backdrop-blur bg-neutral-950 bg-opacity-80 gap-10")}>
-      <div className={cn("w-[15rem] h-[15rem] rounded-[50%] bg-transparent border-[15px] border-transparent border-t-[15px] border-t-blue-800 animate-spin")}></div>
-      <p>The page <code>{router.pathname}</code> doesn't exist!</p>
+      <Ban className={cn("w-52 h-52 text-red-700 animate-pulse")} />
+      {message.length > 0 ? <p>{message}</p> : <p>The page <code className={cn("text-red-400")}>{window.location.pathname}</code> doesn't exist!</p>}
     </div>
   )
 }

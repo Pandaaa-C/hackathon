@@ -1,6 +1,7 @@
 "use server";
 
 import { CreateRoomFormCallback, SubmitCreateRoomFormOptions } from "@/interfaces/room-create-form";
+import { ISession } from "@/interfaces/session-user";
 import { createRandomString } from "@/lib/generateRoomCode";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
@@ -17,7 +18,6 @@ export async function submitRoomForm({ name, topic, difficulty, maxPlayers, iso,
   if (!session) return { success: false, message: "Session error! (#0.6)", id: -1 };
 
   const rooms = await db.rooms.findMany({});
-  console.log(rooms)
   if (rooms.find(x => x.name == name)) return {
     id: -1,
     message: "A room with that name already exists! (#0.7)",
@@ -27,13 +27,16 @@ export async function submitRoomForm({ name, topic, difficulty, maxPlayers, iso,
   const room = await db.rooms.create({
     data: {
       name: name.trim(),
+      creator_id: session.user.id,
       topic: topic.trim(),
       difficulty: difficulty,
       maxPlayers: maxPlayers,
       players: "[]",
       iso: iso,
       private: privateRoom,
-      code: privateRoom ? createRandomString(10) : ""
+      code: privateRoom ? createRandomString(10) : "",
+      created_at: new Date(),
+      playTime: 24
     }
   });
 
