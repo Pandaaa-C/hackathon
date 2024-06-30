@@ -21,6 +21,7 @@
 *.pem
 .idea
 .vscode
+uploads
 
 # debug
 npm-debug.log*
