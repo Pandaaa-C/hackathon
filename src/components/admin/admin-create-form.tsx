@@ -14,7 +14,7 @@ import { ChangeEvent } from "react";
 import { submitRoomForm } from "@/app/admin/create/(form)/submitRoomForm";
 import { useRouter } from "next/navigation";
 
-export default function AdminCreateForm() {
+export default function AdminCreateForm({ templates }: { templates: string[] }) {
   const router = useRouter();
 
   const {
@@ -82,8 +82,22 @@ export default function AdminCreateForm() {
           formState.errors.difficulty && <p className={cn("text-red-500 text-sm")}>{formState.errors.difficulty.message}</p>
         }
         <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="iso" className={cn("font-bold text-base")}>Choose file</Label>
-          <Input id="iso" onChange={(event) => setValue("iso", event.target.value)} type="file" />
+          <Label htmlFor="iso" className={cn("font-bold text-base")}>Choose template</Label>
+          <Select onValueChange={(value: string) => setValue("iso", value)}>
+            <SelectTrigger>
+              <SelectValue {...register('iso')} placeholder="Select an iso" />
+            </SelectTrigger>
+            <SelectContent className={cn("bg-background")}>
+              <SelectGroup>
+                {
+                  templates.map((template, index) => {
+                    return <SelectItem key={index} className={cn("hover:bg-black cursor-pointer")} value={template}>{template}</SelectItem>
+                  })
+                }
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          {/* <Input id="iso" onChange={(event) => setValue("iso", event.target.value)} type="file" /> */}
         </div>
         {
           formState.errors.iso && <p className={cn("text-red-500 text-sm")}>{formState.errors.iso.message}</p>
